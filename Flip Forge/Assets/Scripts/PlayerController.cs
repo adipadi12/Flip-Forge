@@ -17,23 +17,22 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         float move = Input.GetAxis("Horizontal");
-        
-        if(move > 0)
+
+        float moveInput = Input.GetAxis("Horizontal") * moveSpeed;
+
+        Vector3 movement = Vector3.right * moveInput * Time.deltaTime;
+
+        if (move > 0)
         {
-            transform.Translate(new Vector2(move * moveSpeed * Time.deltaTime, 0));
-            animator.SetBool("IsRunning", true);
+            transform.localRotation = new Quaternion(0, 0, 0, move);
+            transform.Translate(movement);
         }
         else if (move < 0)
         {
-            transform.Translate(new Vector2(move * moveSpeed * Time.deltaTime, 0));
-            transform.Rotate(new Vector2(180f, 0));
-            animator.SetBool("IsRunning", true);
+            transform.localRotation = new Quaternion(0, 180, 0, move);
+            transform.Translate(-movement);
         }
-
-        else
-        {
-            animator.SetBool("IsRunning", false);
-        }
+        animator.SetFloat("Speed", Mathf.Abs(move));
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
