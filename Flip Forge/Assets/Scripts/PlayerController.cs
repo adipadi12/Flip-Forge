@@ -2,27 +2,47 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 5f;
-    public float gravityScale = 1f;
+    [SerializeField] private Animator animator;
+
+    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float gravityScale = 1f;
+
     Rigidbody2D rb;
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        rb.gravityScale = gravityScale;
     }
 
     void Update()
     {
         float move = Input.GetAxis("Horizontal");
-        rb.linearVelocity = new Vector2(move * moveSpeed, rb.linearVelocity.y);
+        
+        if(move > 0)
+        {
+            transform.Translate(new Vector2(move * moveSpeed * Time.deltaTime, 0));
+            animator.SetBool("IsRunning", true);
+        }
+        else if (move < 0)
+        {
+            transform.Translate(new Vector2(move * moveSpeed * Time.deltaTime, 0));
+            transform.Rotate(new Vector2(180f, 0));
+            animator.SetBool("IsRunning", true);
+        }
+
+        else
+        {
+            animator.SetBool("IsRunning", false);
+        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rb.gravityScale *= -1; // Flip gravity
+            rb.gravityScale *= -1;
             Vector3 scale = transform.localScale;
-            scale.y *= -1; // Flip sprite visually
+            scale.y *= -1;
             transform.localScale = scale;
+            animator.SetTrigger("SpacePressed");
         }
     }
+
 }
