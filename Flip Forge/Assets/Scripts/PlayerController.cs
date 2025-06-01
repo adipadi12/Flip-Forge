@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -6,6 +7,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private float gravityScale = 1f;
+    [SerializeField] private float shakeIntensity = 0.1f; // Shake intensity
 
     Rigidbody2D rb;
 
@@ -33,9 +35,10 @@ public class PlayerController : MonoBehaviour
             transform.Translate(-movement);
         }
         animator.SetFloat("Speed", Mathf.Abs(move));
-
+        
         if (Input.GetKeyDown(KeyCode.Space))
         {
+            AudioManager.Instance.PlayGravitySwitchSound(); // Play gravity switch sound
             rb.gravityScale *= -1;
             Vector3 scale = transform.localScale;
             scale.y *= -1;
@@ -49,7 +52,7 @@ public class PlayerController : MonoBehaviour
         if (collision.gameObject.CompareTag("Finish"))
         {
             //animator.SetBool("IsGrounded", true);
-            Debug.Log("Player has reached the finish line!");
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
         }
     }
 
