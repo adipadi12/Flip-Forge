@@ -24,8 +24,13 @@ public class GameManager : MonoBehaviour
     }
     private void Awake()
     {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(gameObject);
+            return;
+        }
         Instance = this; // Set the singleton instance
-        DontDestroyOnLoad(gameObject); // Prevent this GameObject from being destroyed when loading a new scene
+        //DontDestroyOnLoad(gameObject); // Prevent this GameObject from being destroyed when loading a new scene
     }
 
 
@@ -58,20 +63,13 @@ public class GameManager : MonoBehaviour
 
         AudioManager.Instance.PlayDamageSound(); // Play the damage sound
 
-        //if (deathCount >= 2)
-        //{
-        //    adPopupPanel.SetActive(true); // Show the ad popup after 2 deaths
-        //    PauseGameOnDeath(); // Pause the game when ad popup is shown
-        //    Debug.Log("Ad Popup shown after 2 deaths!"); // Log ad popup message
-        //}
-
         Debug.Log("Lives left: " + intLives); // Log the remaining lives for debugging
 
         if (intLives <= 0)
         {
             deathCount++; // Increment the death count
             Debug.Log("Death Count: " + deathCount); // Log the death count for debugging
-            if (deathCount % 2 == 0)
+            if (deathCount % 3 == 0)
             {
                 adPopupPanel?.SetActive(true);
                 PauseGameOnDeath(); // Pause the game when ad popup is shown
@@ -98,6 +96,7 @@ public class GameManager : MonoBehaviour
     private void UnpauseGameOnRestart()
     {
         Time.timeScale = 1f; // Unpause the game
+        adPopupPanel?.SetActive(false); // Hide the ad popup panel
     }
 
     //all button clicks
@@ -113,6 +112,13 @@ public class GameManager : MonoBehaviour
 
     public void OnRestartClick()
     {
+        moneyCollectedCount = 0; // Reset the money collected count
+        intLives = 3; // Reset the lives count
+
+        // Update UI immediately
+        if (moneyCollectedText != null) moneyCollectedText.text = "0";
+        if (livesText != null) livesText.text = "3";
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the current scene
     }
 
@@ -123,7 +129,10 @@ public class GameManager : MonoBehaviour
 
     public void OnAdWatchClicked()
     {
-        adPopupPanel?.SetActive(false); // Hide the ad popup panel
+        // Find active ad panel in current scene
+        GameObject currentAdPanel = GameObject.FindGameObjectWithTag("AdPopup");
+        if (currentAdPanel != null) currentAdPanel.SetActive(false);
+        UnpauseGameOnRestart(); // Unpause the game when ad is watched
     }
 
     private void OnDisable()

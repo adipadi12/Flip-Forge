@@ -47,3 +47,4 @@ MonoBehaviour:
   moneyCollectedText: {fileID: 0}
   livesText: {fileID: 0}
   gameOverPanel: {fileID: 5066650177183751204, guid: de748ab7850af784f8ad74a07b6dd86d, type: 3}
+  adPopupPanel: {fileID: 2145721640267683530, guid: 2ca1109edee755a4b9d14faf2fcf66e3, type: 3}

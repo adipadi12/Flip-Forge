@@ -469,7 +469,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4169313072038400058}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8512343566606789409, guid: 0dff9b50412a8b640857300797914b9e, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnRestartClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &5066650177183751204
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,7 +493,7 @@ GameObject:
   - component: {fileID: 3616530583117328478}
   m_Layer: 0
   m_Name: GameOverScreen
-  m_TagString: Untagged
+  m_TagString: GameOverScreen
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -761,4 +773,16 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 8421737085188310777}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 8512343566606789409, guid: 0dff9b50412a8b640857300797914b9e, type: 3}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: OnQuitToMainMenuClick
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

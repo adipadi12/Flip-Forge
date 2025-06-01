@@ -45,6 +45,11 @@ public class PlayerController : MonoBehaviour
             transform.localScale = scale;
             animator.SetTrigger("SpacePressed");
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            SceneManager.LoadScene("MainMenu");
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
