@@ -36,6 +36,9 @@ public class GameManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        moneyCollectedCount = 0; // Reset money collected count when a new scene is loaded
+        intLives = 3; // Reset player lives when a new scene is loaded
+
         // Find UI elements in the new scene
         moneyCollectedText = GameObject.Find("MoneyText")?.GetComponent<TextMeshProUGUI>();
         livesText = GameObject.Find("LivesText")?.GetComponent<TextMeshProUGUI>();
@@ -116,24 +119,15 @@ public class GameManager : MonoBehaviour
 
     public void OnRestartClick()
     {
-        SceneManager.sceneLoaded += ResetStateAfterSceneLoad; // Reset the game state before restarting
+        moneyCollectedCount = 0; // Reset money collected count
+        intLives = 3; // Reset player lives
+
+        // Update UI immediately
+        if (moneyCollectedText != null) moneyCollectedText.text = "0";
+        if (livesText != null) livesText.text = "3";
+
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the scene
         UnpauseGameOnRestart(); // Unpause the game when restarted
-    }
-
-    private void ResetStateAfterSceneLoad(Scene scene, LoadSceneMode mode)
-    {
-        moneyCollectedCount = 0;
-        intLives = 3;
-        deathCount = 0;
-
-        moneyCollectedText = GameObject.Find("MoneyText")?.GetComponent<TextMeshProUGUI>();
-        livesText = GameObject.Find("LivesText")?.GetComponent<TextMeshProUGUI>();
-
-        moneyCollectedText?.SetText("0");
-        livesText?.SetText("3");
-
-        SceneManager.sceneLoaded -= ResetStateAfterSceneLoad;
     }
 
     public void OnQuitToMainMenuClick()
