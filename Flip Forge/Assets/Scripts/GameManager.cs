@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             return;
         }
         Instance = this; // Set the singleton instance
-        //DontDestroyOnLoad(gameObject); // Prevent this GameObject from being destroyed when loading a new scene
+        DontDestroyOnLoad(gameObject); // Prevent this GameObject from being destroyed when loading a new scene
     }
 
 
@@ -45,8 +45,12 @@ public class GameManager : MonoBehaviour
         moneyCollectedText?.SetText(moneyCollectedCount.ToString());
         livesText?.SetText(intLives.ToString());
 
-        gameOverPanel?.SetActive(false); // Hide the Game Over panel when a new scene is loaded
-        adPopupPanel?.SetActive(false); // Hide the Ad popup panel when a new scene is loaded
+        gameOverPanel = GameObject.FindGameObjectWithTag("GameOverScreen");
+        adPopupPanel = GameObject.FindGameObjectWithTag("AdPopup");
+
+        // Avoid null references by checking before setting active
+        gameOverPanel?.SetActive(false);
+        adPopupPanel?.SetActive(false);
     }
     public void OnMoneyCollected()
     {
@@ -112,14 +116,24 @@ public class GameManager : MonoBehaviour
 
     public void OnRestartClick()
     {
-        moneyCollectedCount = 0; // Reset the money collected count
-        intLives = 3; // Reset the lives count
+        SceneManager.sceneLoaded += ResetStateAfterSceneLoad; // Reset the game state before restarting
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the scene
+        UnpauseGameOnRestart(); // Unpause the game when restarted
+    }
 
-        // Update UI immediately
-        if (moneyCollectedText != null) moneyCollectedText.text = "0";
-        if (livesText != null) livesText.text = "3";
+    private void ResetStateAfterSceneLoad(Scene scene, LoadSceneMode mode)
+    {
+        moneyCollectedCount = 0;
+        intLives = 3;
+        deathCount = 0;
 
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload the current scene
+        moneyCollectedText = GameObject.Find("MoneyText")?.GetComponent<TextMeshProUGUI>();
+        livesText = GameObject.Find("LivesText")?.GetComponent<TextMeshProUGUI>();
+
+        moneyCollectedText?.SetText("0");
+        livesText?.SetText("3");
+
+        SceneManager.sceneLoaded -= ResetStateAfterSceneLoad;
     }
 
     public void OnQuitToMainMenuClick()

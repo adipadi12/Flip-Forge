@@ -2047,6 +2047,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
+    - target: {fileID: 1417485586900434886, guid: 72862e0b1fde47f4298eb16db7089cc7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 1706604095443180093, guid: 72862e0b1fde47f4298eb16db7089cc7, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -2077,7 +2081,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5605374815539265858, guid: 72862e0b1fde47f4298eb16db7089cc7, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6040248017230033854, guid: 72862e0b1fde47f4298eb16db7089cc7, type: 3}
       propertyPath: m_Name
@@ -3044,11 +3048,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2962032472032585053, guid: c6192be533d79e447861a68029e99b2e, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2962032472032585053, guid: c6192be533d79e447861a68029e99b2e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2962032472032585053, guid: c6192be533d79e447861a68029e99b2e, type: 3}
       propertyPath: m_LocalRotation.y
@@ -3060,7 +3064,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2962032472032585053, guid: c6192be533d79e447861a68029e99b2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
+      value: 180
       objectReference: {fileID: 0}
     - target: {fileID: 2962032472032585053, guid: c6192be533d79e447861a68029e99b2e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y

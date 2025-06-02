@@ -1372,7 +1372,7 @@ GameObject:
   - component: {fileID: 94873539372475386}
   - component: {fileID: 8957167141293102144}
   m_Layer: 0
-  m_Name: MoneyContainer
+  m_Name: MoneyContainerHI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

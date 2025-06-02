@@ -36,6 +36,13 @@ public class PlayerController : MonoBehaviour
         }
         animator.SetFloat("Speed", Mathf.Abs(move));
         
+        OnSpacePressedForGravitySwitch();
+
+        OnEscapeKeyPressed();
+    }
+
+    private void OnSpacePressedForGravitySwitch()
+    {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             AudioManager.Instance.PlayGravitySwitchSound(); // Play gravity switch sound
@@ -45,7 +52,10 @@ public class PlayerController : MonoBehaviour
             transform.localScale = scale;
             animator.SetTrigger("SpacePressed");
         }
+    }
 
+    private void OnEscapeKeyPressed()
+    {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             SceneManager.LoadScene("MainMenu");
